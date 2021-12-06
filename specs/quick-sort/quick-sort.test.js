@@ -13,12 +13,36 @@
 */
 
 function quickSort(nums) {
-  // code goes here
+  // Base case, array of length 0 or 1
+  if (nums.length < 2) return nums
+
+  // Choose pivot
+  const pivot = nums[nums.length - 1]
+
+  // Separete into left and right arrays
+  const leftArray = []
+  const rightArray = []
+
+  for (let index = 0; index < nums.length - 1; index++) {
+    const current = nums[index]
+    if (current <= pivot) {
+      leftArray.push(current)
+    } else {
+      rightArray.push(current)
+    }
+  }
+
+  // Call quickSort on left and right array
+  const leftSorted = quickSort(leftArray)
+  const rightSorted = quickSort(rightArray)
+
+  // Return left concat pivot right
+  return leftSorted.concat(pivot, rightSorted)
 }
 
 // unit tests
 // do not modify the below code
-test.skip("quickSort", function () {
+test("quickSort", function () {
   const input = [10, 8, 2, 1, 6, 3, 9, 4, 7, 5];
   const answer = quickSort(input);
 
